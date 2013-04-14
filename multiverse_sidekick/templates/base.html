@@ -9,6 +9,11 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/multiverse.js"></script>
   </head>
   <body>
+    <header>
+      <h2><a href="{% url 'home' %}">Sentinels of the Multiverse - Sidekick</a></h2>
+    </header>
     {% block content %}{% endblock %}
+    <footer>
+    </footer>
   </body>
 </html>

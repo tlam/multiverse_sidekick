@@ -2,12 +2,13 @@
 
 {% block content %}
 
+<a href="{% url 'games:index' %}">List of games</a>
+
 <form action="{% url 'games:create' %}" method="get">
   <select name="num_heroes">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
+  {% for i in max_heroes %}
+    <option value="{{ i }}" {% if i == 3 %}selected{% endif %}>{{ i }}</option>
+  {% endfor %}
   </select>
   <input type="submit" name="custom" value="Custom" />
   <input type="submit" name="random" value="Random" />

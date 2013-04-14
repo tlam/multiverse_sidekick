@@ -2,6 +2,14 @@ body {
   margin: 0 5em;
 }
 
+header h2 {
+  margin-bottom: 0;
+}
+
+footer {
+  margin-top: 1em;
+}
+
 section.environment-villain, section.heroes {
   overflow: hidden;
 }

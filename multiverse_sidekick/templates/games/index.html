@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table>
+  {% for game in games %}
+  <tr>
+    <td><a href="{% url 'games:show' game.pk %}">{{ game.created_at }}</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

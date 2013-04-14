@@ -1,16 +1,33 @@
 from django.forms.models import modelformset_factory
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 
+from environment.models import Environment
 from games.forms import GameForm
 from games.models import ActiveHero, Game
 from heroes.models import Hero
+from villains.models import Villain
 
+
+def index(request):
+    if request.user.is_anonymous():
+        games = []
+    else:
+        games = request.user.game_set.order_by('-created_at')
+    context = {
+        'games': games,
+    }
+    return render(
+        request,
+        'games/index.html',
+        context,
+    )
 
 def create(request):
     num_heroes = int(request.GET.get('num_heroes', 3))
+    is_random = 'random' in request.GET
 
     if request.method == 'POST':
-        form = GameForm(request.POST)
+        form = GameForm(num_heroes, False, request.POST)
         if form.is_valid() and not request.user.is_anonymous():
             game = form.save(commit=False)
             game.profile = request.user
@@ -23,9 +40,17 @@ def create(request):
                     game=game,
                     hp=hero.starting_hp,
                 )
+            return redirect('games:show', game.pk)
             
     else:
-        form = GameForm()
+        if is_random:
+            initial = {
+                'environment': Environment.objects.order_by('?')[0],
+                'villain': Villain.objects.order_by('?')[0],
+            }
+        else:
+            initial = {}
+        form = GameForm(num_heroes, is_random, initial=initial)
 
     context = {
         'form': form,

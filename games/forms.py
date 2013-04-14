@@ -7,9 +7,10 @@ from heroes.models import Hero
 
 
 class GameForm(ModelForm):
-    heroes = fields.MultipleChoiceField(required=True,
-        widget=CheckboxSelectMultiple, choices=Hero.choices())
-
     class Meta:
         model = Game
         fields = ('villain', 'environment',)
+
+    def __init__(self, num_heroes, is_random, *args, **kwargs):
+        super(GameForm, self).__init__(*args, **kwargs)
+        self.fields['heroes'] = fields.MultipleChoiceField(required=True, widget=CheckboxSelectMultiple, choices=Hero.choices(num_heroes, is_random))
