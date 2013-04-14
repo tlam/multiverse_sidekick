@@ -5,6 +5,7 @@ from django.db import models
 class Game(models.Model):
     profile = models.ForeignKey(settings.AUTH_USER_MODEL)
     villain = models.ForeignKey('villains.Villain')
+    villain_hp = models.IntegerField(default=0)
     environment = models.ForeignKey('environment.Environment')
     created_at = models.DateTimeField(auto_now_add=True)
 

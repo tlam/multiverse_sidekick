@@ -1,8 +1,8 @@
 from django.forms.models import modelformset_factory
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from games.forms import GameForm
-from games.models import ActiveHero
+from games.models import ActiveHero, Game
 from heroes.models import Hero
 
 
@@ -14,6 +14,7 @@ def create(request):
         if form.is_valid() and not request.user.is_anonymous():
             game = form.save(commit=False)
             game.profile = request.user
+            game.villain_hp = game.villain.starting_hp
             game.save()
             heroes = Hero.objects.filter(pk__in=form.cleaned_data['heroes'])
             for hero in heroes:
@@ -32,5 +33,19 @@ def create(request):
     return render(
         request,
         'games/create.html',
+        context,
+    )
+
+
+def show(request, game_id):
+    game = get_object_or_404(Game, pk=game_id)
+
+    context = {
+        'game': game,
+    }
+
+    return render(
+        request,
+        'games/show.html',
         context,
     )

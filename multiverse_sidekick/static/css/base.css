@@ -1,0 +1,29 @@
+body {
+  margin: 0 5em;
+}
+
+section.environment-villain, section.heroes {
+  overflow: hidden;
+}
+
+section.environment-villain .environment {
+  float: left;
+}
+
+section.environment-villain .villain {
+  float: right;
+}
+
+section.heroes {
+  margin: 0 auto;
+  width: 80%;
+}
+
+section.heroes div.hero {
+  float: left;
+  margin-right: 5em;
+}
+
+.ui-spinner-input {
+  width: 2em;
+}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="environment-villain">
+  <div class="environment">
+    <h4>{{ game.environment }}</h4>
+    <img src="{{ MEDIA_URL }}{{ game.environment.image }}" />
+  </div>
+
+  <div class="villain">
+    <h4>{{ game.villain }}</h4>
+    <img src="{{ MEDIA_URL }}{{ game.villain.image }}" />
+    <div>
+      <input id="villain-spinner" name="value" value="{{ game.villain_hp }}" /> / {{ game.villain.starting_hp }}
+    </div>
+  </div>
+</section>
+
+<section class="heroes">
+  {% for active_hero in game.activehero_set.all %}
+    <div class="hero">
+    {% with active_hero.hero as hero %}
+      <h4>{{ hero }}</h4>
+      <img src="{{ MEDIA_URL }}{{ hero.image }}" />
+      <div>
+        <input class="hero-spinner" name="value" value="{{ active_hero.hp }}" /> / {{ hero.starting_hp }}
+      </div>
+    {% endwith %}
+    </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
