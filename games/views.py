@@ -11,7 +11,7 @@ from villains.models import Villain
 
 def index(request):
     if request.user.is_anonymous():
-        games = []
+        games = Game.objects.order_by('-created_at')
     else:
         games = request.user.game_set.order_by('-created_at')
     context = {
@@ -76,6 +76,7 @@ def show(request, game_id):
 
     context = {
         'game': game,
+        'profile': request.user,
     }
 
     return render(

@@ -32,7 +32,9 @@
       {% endfor %}
   </section>
 
+  {% if profile.is_authenticated %}
   <input type="submit" value="Save" />
+  {% endif %}
 </form>
 
 {% endblock %}

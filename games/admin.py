@@ -7,6 +7,7 @@ class ActiveHeroInline(admin.TabularInline):
 
 
 class GameAdmin(admin.ModelAdmin):
+    list_display = ('profile', 'pk', 'created_at',)
     inlines = [
         ActiveHeroInline,
     ]
