@@ -1,5 +1,7 @@
 import os
 
+import dj_database_url
+
 ROOT_PATH = os.path.dirname(__file__)
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -11,15 +13,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'multiverse',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'tlam',
-        'PASSWORD': 'tlam',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
+    'default': dj_database_url.config(default='postgres://localhost')
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -162,3 +156,8 @@ LOGGING = {
         },
     }
 }
+
+try:
+    from dev_settings import *
+except ImportError:
+    pass
