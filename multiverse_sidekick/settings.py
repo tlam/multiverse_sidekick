@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'environment',
     'heroes',
     'villains',
+    'games',
 )
 
 # A sample logging configuration. The only tangible logging
