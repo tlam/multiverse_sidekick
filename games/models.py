@@ -1,15 +1,15 @@
+from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
 
 
 class Game(models.Model):
-    user = models.OneToOneField(User)
+    profile = models.ForeignKey(settings.AUTH_USER_MODEL)
     villain = models.ForeignKey('villains.Villain')
     environment = models.ForeignKey('environment.Environment')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return u'Game %s' % self.user
+        return u'Game %s' % self.profile
 
 
 class ActiveHero(models.Model):

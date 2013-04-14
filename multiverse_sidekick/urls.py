@@ -8,9 +8,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'multiverse_sidekick.views.home', name='home'),
-    # url(r'^multiverse_sidekick/', include('multiverse_sidekick.foo.urls')),
+    url(r'^$', 'multiverse_sidekick.views.home', name='home'),
+    url(r'^games/', include('games.urls', namespace='games'), name='games'),
 
     url(r'^admin/', include(admin.site.urls)),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

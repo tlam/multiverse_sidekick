@@ -14,3 +14,10 @@ class Hero(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.name
+
+    @staticmethod
+    def choices():
+        hero_tuples = ()
+        for hero in Hero.objects.all():
+            hero_tuples = hero_tuples + ((hero.id, hero.name),)
+        return hero_tuples

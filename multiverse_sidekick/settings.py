@@ -116,6 +116,8 @@ TEMPLATE_DIRS = (
     os.path.join(ROOT_PATH, 'templates'),
 )
 
+AUTH_USER_MODEL = 'profiles.Profile'
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,6 +130,7 @@ INSTALLED_APPS = (
     'environment',
     'heroes',
     'villains',
+    'profiles',
     'games',
 )
 
