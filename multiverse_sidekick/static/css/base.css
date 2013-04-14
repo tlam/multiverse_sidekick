@@ -35,3 +35,17 @@ section.heroes div.hero {
 .ui-spinner-input {
   width: 2em;
 }
+
+ul.messages {
+  padding-left: 0;
+}
+
+ul.messages li {
+  border: 1px solid #94da3a;
+  list-style: none;
+  padding: 0.5em;
+}
+
+ul.messages li.success {
+  background-color: #E0FFB8;
+}

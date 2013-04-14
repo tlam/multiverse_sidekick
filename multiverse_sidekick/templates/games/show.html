@@ -2,33 +2,37 @@
 
 {% block content %}
 
-<section class="environment-villain">
-  <div class="environment">
-    <h4>{{ game.environment }}</h4>
-    <img src="{{ MEDIA_URL }}{{ game.environment.image }}" />
-  </div>
-
-  <div class="villain">
-    <h4>{{ game.villain }}</h4>
-    <img src="{{ MEDIA_URL }}{{ game.villain.image }}" />
-    <div>
-      <input id="villain-spinner" name="value" value="{{ game.villain_hp }}" /> / <b>{{ game.villain.starting_hp }}</b>
-    </div>
-  </div>
-</section>
-
-<section class="heroes">
-  {% for active_hero in game.activehero_set.all %}
-    <div class="hero">
-    {% with active_hero.hero as hero %}
-      <h4>{{ hero }}</h4>
-      <img src="{{ MEDIA_URL }}{{ hero.image }}" />
-      <div>
-        <input class="hero-spinner" name="value" value="{{ active_hero.hp }}" /> / <b>{{ hero.starting_hp }}</b>
+<form action="" method="post">{% csrf_token %}
+  <section class="environment-villain">
+      <div class="environment">
+        <h4>{{ game.environment }}</h4>
+        <img src="{{ MEDIA_URL }}{{ game.environment.image }}" />
       </div>
-    {% endwith %}
-    </div>
-  {% endfor %}
-</section>
+
+      <div class="villain">
+        <h4>{{ game.villain }}</h4>
+        <img src="{{ MEDIA_URL }}{{ game.villain.image }}" />
+        <div>
+          <input id="villain-spinner" name="villain" value="{{ game.villain_hp }}" /> / <b>{{ game.villain.starting_hp }}</b>
+        </div>
+      </div>
+    </section>
+
+    <section class="heroes">
+      {% for active_hero in game.activehero_set.all %}
+        <div class="hero">
+        {% with active_hero.hero as hero %}
+          <h4>{{ hero }}</h4>
+          <img src="{{ MEDIA_URL }}{{ hero.image }}" />
+          <div>
+            <input class="hero-spinner" name="hero-{{ hero.pk }}" value="{{ active_hero.hp }}" /> / <b>{{ hero.starting_hp }}</b>
+          </div>
+        {% endwith %}
+        </div>
+      {% endfor %}
+  </section>
+
+  <input type="submit" value="Save" />
+</form>
 
 {% endblock %}

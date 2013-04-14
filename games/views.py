@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.forms.models import modelformset_factory
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -64,6 +65,14 @@ def create(request):
 
 def show(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
+    if request.method == 'POST':
+        villain_hp = request.POST.get('villain')
+        game.villain_hp = villain_hp
+        game.save()
+        for active_hero in game.activehero_set.all():
+            active_hero.hp = request.POST.get('hero-%i' % active_hero.hero.pk)
+            active_hero.save()
+        messages.success(request, 'Saved')
 
     context = {
         'game': game,
