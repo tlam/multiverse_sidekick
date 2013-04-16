@@ -4,7 +4,9 @@
 <table>
   {% for game in games %}
   <tr>
-    <td><a href="{% url 'games:show' game.pk %}">{{ game.created_at }}</a></td>
+    <td><a href="{% url 'games:show' game.pk %}">Game #{{ game.pk }}</a></td>
+    <td>{{ game.who_won }}</td>
+    <td>{{ game.created_at }}</td>
   </tr>
   {% endfor %}
 </table>

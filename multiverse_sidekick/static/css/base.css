@@ -49,3 +49,8 @@ ul.messages li {
 ul.messages li.success {
   background-color: #E0FFB8;
 }
+
+div.game-status {
+  float: left;
+  margin-left: 20em;
+}

@@ -9,6 +9,18 @@
         <img src="{{ MEDIA_URL }}{{ game.environment.image }}" />
       </div>
 
+      <div class="game-status">
+        <h4>Game #{{ game.pk }}</h4>
+        <em>
+        {% if game.is_over %}
+          {{ game.who_won }} wins!
+        {% else %}
+          { game.who_won }}
+        {% endif %}
+        </em>
+        <p>Created: {{ game.created_at|date:"H:m, D d, F Y" }}</p>
+      </div>
+
       <div class="villain">
         <h4>{{ game.villain }}</h4>
         <img src="{{ MEDIA_URL }}{{ game.villain.image }}" />
@@ -32,7 +44,7 @@
       {% endfor %}
   </section>
 
-  {% if profile.is_authenticated %}
+  {% if profile.is_authenticated and not game.is_over %}
   <input type="submit" value="Save" />
   {% endif %}
 </form>

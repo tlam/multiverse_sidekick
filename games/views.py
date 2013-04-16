@@ -68,10 +68,18 @@ def show(request, game_id):
     if request.method == 'POST':
         villain_hp = request.POST.get('villain')
         game.villain_hp = villain_hp
-        game.save()
+        total_hero_hp = 0
+
         for active_hero in game.activehero_set.all():
-            active_hero.hp = request.POST.get('hero-%i' % active_hero.hero.pk)
+            hero_hp = int(request.POST.get('hero-%i' % active_hero.hero.pk, 0))
+            total_hero_hp += hero_hp
+            active_hero.hp = hero_hp
             active_hero.save()
+
+        if not int(villain_hp) or not total_hero_hp:
+            game.is_over = True
+
+        game.save()
         messages.success(request, 'Saved')
 
     context = {
