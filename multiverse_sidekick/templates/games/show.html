@@ -15,7 +15,7 @@
         {% if game.is_over %}
           {{ game.who_won }} wins!
         {% else %}
-          { game.who_won }}
+          {{ game.who_won }}
         {% endif %}
         </em>
         <p>Created: {{ game.created_at|date:"H:m, D d, F Y" }}</p>
