@@ -35,12 +35,15 @@ def create(request):
             game.villain_hp = game.villain.starting_hp
             game.save()
             heroes = Hero.objects.filter(pk__in=form.cleaned_data['heroes'])
+            count = heroes.count()
             for hero in heroes:
                 ActiveHero.objects.create(
                     hero=hero,
                     game=game,
                     hp=hero.starting_hp,
+                    order=count,
                 )
+                count -= 1
             return redirect('games:show', game.pk)
             
     else:

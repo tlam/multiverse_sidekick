@@ -26,6 +26,10 @@ class ActiveHero(models.Model):
     hero = models.ForeignKey('heroes.Hero')
     game = models.ForeignKey('games.Game')
     hp = models.IntegerField(default=0)
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['-order']
 
     def __unicode__(self):
         return u'%s' % self.hero
