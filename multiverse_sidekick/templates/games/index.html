@@ -13,8 +13,8 @@
   {% for game in games %}
   <tr>
     <td><a href="{% url 'games:show' game.pk %}">Game #{{ game.pk }}</a></td>
-    <td>{{ game.who_won }}</td>
-    <td>{{ game.villain }} {% if game.is_over %}won!{% endif %}</td>
+    <td>{{ game.who_won }} {% if game.is_over %}won!{% endif %}</td>
+    <td>{{ game.villain }}</td>
     <td>{{ game.environment }}</td>
     <td>{{ game.created_at }}</td>
     {% for active_hero in game.activehero_set.all %}
