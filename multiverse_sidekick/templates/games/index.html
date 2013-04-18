@@ -1,12 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-<table>
+<table id="games">
+  <tr>
+    <th>Game</th>
+    <th>Status</th>
+    <th>Villain</th>
+    <th>Environment</th>
+    <th>Created</th>
+    <th colspan="3">Heroes</th>
+  </tr>
   {% for game in games %}
   <tr>
     <td><a href="{% url 'games:show' game.pk %}">Game #{{ game.pk }}</a></td>
     <td>{{ game.who_won }}</td>
+    <td>{{ game.villain }}</td>
+    <td>{{ game.environment }}</td>
     <td>{{ game.created_at }}</td>
+    {% for active_hero in game.activehero_set.all %}
+      <td>{{ active_hero.hero }}</td>
+    {% endfor %}
   </tr>
   {% endfor %}
 </table>

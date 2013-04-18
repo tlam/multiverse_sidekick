@@ -54,3 +54,12 @@ div.game-status {
   float: left;
   margin-left: 20em;
 }
+
+table#games {
+  border-collapse: collapse;
+}
+
+table#games th, table#games td {
+  border: 1px solid black;
+  padding: 0.7em;
+}
