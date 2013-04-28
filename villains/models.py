@@ -11,6 +11,7 @@ class Villain(models.Model):
     name = models.CharField(max_length=255)
     starting_hp = models.IntegerField(default=0)
     image = models.ImageField(upload_to=villains_path)
+    nemesis = models.ForeignKey('heroes.Hero', null=True, blank=True)
 
     def __unicode__(self):
         return u'%s' % self.name

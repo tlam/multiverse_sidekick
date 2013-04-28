@@ -88,6 +88,7 @@ def show(request, game_id):
     context = {
         'game': game,
         'profile': request.user,
+        'villain_nemesis': game.villain.nemesis,
     }
 
     return render(

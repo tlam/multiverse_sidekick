@@ -22,7 +22,7 @@
       </div>
 
       <div class="villain">
-        <h4>{{ game.villain }}</h4>
+        <h4>{{ game.villain }} {% if villain_nemesis %}&gt; <em>{{ villain_nemesis }}</em>{% endif %}</h4>
         <img src="{{ MEDIA_URL }}{{ game.villain.image }}" />
         <div>
           <input id="villain-spinner" name="villain" value="{{ game.villain_hp }}" /> / <b>{{ game.villain.starting_hp }}</b>
@@ -34,7 +34,7 @@
       {% for active_hero in game.activehero_set.all %}
         <div class="hero">
         {% with active_hero.hero as hero %}
-          <h4>{{ hero }}</h4>
+          <h4>{{ hero }} {% if hero == villain_nemesis %}&gt; <em>{{ game.villain }}</em>{% endif %}</h4>
           <img src="{{ MEDIA_URL }}{{ hero.image }}" />
           <div>
             <input class="hero-spinner" name="hero-{{ hero.pk }}" value="{{ active_hero.hp }}" /> / <b>{{ hero.starting_hp }}</b>
